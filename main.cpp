@@ -12,7 +12,7 @@ int main(){
     {
         vet[i] = 2*i;
     }
-    AVL* arv = new AVL();
+    Avl* arv = new Avl();
     for (int i = 0; i < tam; i++)
     {
         arv->insere(vet[i]);

@@ -7,7 +7,7 @@ class NoAvl{
         ~NoAvl()              {};
         void setEsq(NoAvl *p) { esq = p; };
         void setInfo(int val) { info = val; };
-        void setDir(NoAVL *p) { dir = p; };
+        void setDir(NoAvl *p) { dir = p; };
         NoAvl* getEsq()       { return esq; };
         int getInfo()         { return info; };
         NoAvl* getDir()       { return dir; };

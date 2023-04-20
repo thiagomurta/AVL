@@ -7,26 +7,26 @@
 
 using namespace std;
 
-AVL::AVL(){
+Avl::Avl(){
     raiz = NULL;
 }
 
-AVL::~AVL(){
+Avl::~Avl(){
     raiz = libera(raiz);
 }
 
-int AVL::getRaiz(){
+int Avl::getRaiz(){
     if(raiz != NULL)
         return raiz->getInfo();
     cout << "Arvore vazia" << endl;
     exit(1);
 }
 
-void AVL::imprime(){
+void Avl::imprime(){
     auxImprime(raiz);
 }
 
-void AVL::auxImprime(NoAvl *p){
+void Avl::auxImprime(NoAvl *p){
     if(p != NULL){
         cout << p->getInfo() << " ";
         auxImprime(p->getEsq());
@@ -34,9 +34,8 @@ void AVL::auxImprime(NoAvl *p){
     }
 }
 
-NoAvl* AVL::libera(NoAvl *p){
-    if (p != NULL)
-    {
+NoAvl* Avl::libera(NoAvl *p){
+    if (p != NULL){
         p->setEsq(libera(p->getEsq()));
         p->setDir(libera(p->getDir()));
         delete p;
@@ -45,37 +44,37 @@ NoAvl* AVL::libera(NoAvl *p){
     return NULL;
 }
 
-void AVL::rotSimEsq(NoAvl *p){
+void Avl::rotSimEsq(NoAvl *p){
     auxRotSimEsq(p);
 }
 
-void AVL::rotSimDir(NoAvl *p){
+void Avl::rotSimDir(NoAvl *p){
     auxRotSimDir(p);
 }
 
-void AVL::rotDupEsq(NoAvl *p){
+void Avl::rotDupEsq(NoAvl *p){
     auxRotDupEsq(p);
 }
 
-void AVL::rotDupDir(NoAvl *p){
+void Avl::rotDupDir(NoAvl *p){
     auxRotDupDir(p);
 }
 
-void AVL::auxRotSimEsq(NoAvl *p){
+void Avl::auxRotSimEsq(NoAvl *p){
     NoAvl* q;
     q = p->getDir();
     p->setDir(q->getEsq());
     q->setEsq(p);
 }
 
-void AVL::auxRotSimDir(NoAvl *p){
+void Avl::auxRotSimDir(NoAvl *p){
     NoAvl* q;
     q = p->getEsq();
     p->setEsq(q->getDir());
     q->setDir(p);
 }
 
-void AVL::auxRotDupEsq(NoAvl *p){
+void Avl::auxRotDupEsq(NoAvl *p){
     NoAvl *q;
     NoAvl *r;
     q = p->getDir();
@@ -86,7 +85,7 @@ void AVL::auxRotDupEsq(NoAvl *p){
     r->setDir(q);
 }
 
-void AVL::auxRotDupDir(NoAvl *p){
+void Avl::auxRotDupDir(NoAvl *p){
     NoAvl *q;
     NoAvl *r;
     q = p->getEsq();
@@ -97,11 +96,11 @@ void AVL::auxRotDupDir(NoAvl *p){
     r->setEsq(q);
 }
 
-int AVL::altura(NoAvl *p){
+int Avl::altura(NoAvl *p){
     return auxAltura(p);
 }
 
-int AVL::auxAltura(NoAvl *p){
+int Avl::auxAltura(NoAvl *p){
     if(p != NULL){
         int e =  1 + auxAltura(p->getEsq());
         int d =  1 + auxAltura(p->getDir());
@@ -113,11 +112,11 @@ int AVL::auxAltura(NoAvl *p){
     }
 }
 
-void AVL::insere(int val){
+void Avl::insere(int val){
     raiz = auxInsere(raiz, val);
 }
 
-NoAvl* AVL::auxInsere(NoAvl *p, int val){
+NoAvl* Avl::auxInsere(NoAvl *p, int val){
     if(p == NULL){
         p = new NoAvl();
         p->setInfo(val);
@@ -132,11 +131,11 @@ NoAvl* AVL::auxInsere(NoAvl *p, int val){
 }
 
 /// verifica e conserta a árvore sempre que o valor da altura não bate
-void AVL::verifica(){
+void Avl::verifica(){
     auxVerifica(raiz);
 }
 
-void AVL::auxVerifica(NoAvl *p){
+void Avl::auxVerifica(NoAvl *p){
     if(p != NULL){
         int h = altura(p);
         if(h == 1){
@@ -145,10 +144,10 @@ void AVL::auxVerifica(NoAvl *p){
         else if(h == -1){
             rotSimDir(p);
         }
-        else if(h <= -2){
+        else if(h < -2){
             rotDupDir(p);
         }
-        else if(h >= 2){
+        else if(h > 2){
             rotDupEsq(p);
         }
         else{

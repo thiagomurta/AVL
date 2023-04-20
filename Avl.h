@@ -2,10 +2,10 @@
 #define AVL_H_INCLUDED
 #include "NoAvl.h"
 
-class AVL{
+class Avl{
     public:
-        AVL();
-        ~AVL();
+        Avl();
+        ~Avl();
         int getRaiz();
         NoAvl* libera(NoAvl *p);
         void imprime();
